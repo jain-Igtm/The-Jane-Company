@@ -2,7 +2,6 @@ const menuToggle = document.querySelector('.menu-toggle');
 const siteNav = document.querySelector('.site-nav');
 const year = document.querySelector('#year');
 const filterButtons = document.querySelectorAll('.filter-button');
-const postCards = document.querySelectorAll('.post-card');
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -22,16 +21,22 @@ if (menuToggle && siteNav) {
   });
 }
 
+const applyPostFilter = () => {
+  const activeButton = document.querySelector('.filter-button.active');
+  const filter = activeButton?.dataset.filter || 'all';
+
+  document.querySelectorAll('.post-card').forEach((card) => {
+    const shouldShow = filter === 'all' || card.dataset.kind === filter || !card.dataset.kind;
+    card.classList.toggle('is-hidden', !shouldShow);
+  });
+};
+
 filterButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    const filter = button.dataset.filter;
-
     filterButtons.forEach((item) => item.classList.remove('active'));
     button.classList.add('active');
-
-    postCards.forEach((card) => {
-      const shouldShow = filter === 'all' || card.dataset.kind === filter;
-      card.classList.toggle('is-hidden', !shouldShow);
-    });
+    applyPostFilter();
   });
 });
+
+window.addEventListener('posts:rendered', applyPostFilter);
