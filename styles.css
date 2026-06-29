@@ -1,0 +1,561 @@
+:root {
+  --paper: #f3ead8;
+  --paper-deep: #e7d8bc;
+  --ink: #201a14;
+  --muted: #6d5d4c;
+  --line: rgba(32, 26, 20, 0.18);
+  --shadow: rgba(61, 43, 25, 0.17);
+  --seal: #7d2f25;
+  --seal-dark: #4d1f19;
+  --cream: #fffaf0;
+  --gold: #b68a46;
+  --max-width: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(182, 138, 70, 0.16), transparent 34rem),
+    linear-gradient(120deg, rgba(255, 250, 240, 0.75), rgba(231, 216, 188, 0.55)),
+    var(--paper);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.65;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(32, 26, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 26, 20, 0.035) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.site-shell {
+  width: min(var(--max-width), calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 18px 0;
+  background: linear-gradient(to bottom, rgba(243, 234, 216, 0.96), rgba(243, 234, 216, 0.82));
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(32, 26, 20, 0.35);
+  background: linear-gradient(145deg, var(--seal), var(--seal-dark));
+  color: var(--cream);
+  border-radius: 50%;
+  font-size: 1.55rem;
+  line-height: 1;
+  box-shadow: 0 12px 28px var(--shadow);
+}
+
+.brand-name,
+.brand-line {
+  display: block;
+}
+
+.brand-name {
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.brand-line {
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.site-nav a {
+  padding: 0.62rem 0.82rem;
+  color: var(--muted);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.96rem;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--ink);
+  border-color: var(--line);
+  background: rgba(255, 250, 240, 0.5);
+  outline: none;
+}
+
+.menu-toggle {
+  display: none;
+  width: 46px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.7);
+}
+
+.menu-toggle span {
+  display: block;
+  width: 19px;
+  height: 1px;
+  margin: 6px auto;
+  background: var(--ink);
+}
+
+.section-panel {
+  position: relative;
+  margin: 28px 0;
+  padding: clamp(24px, 5vw, 56px);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, rgba(255, 250, 240, 0.82), rgba(231, 216, 188, 0.6)),
+    var(--cream);
+  box-shadow: 0 24px 70px var(--shadow);
+  overflow: hidden;
+}
+
+.section-panel::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(32, 26, 20, 0.08);
+  border-radius: 22px;
+  pointer-events: none;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.65fr);
+  align-items: end;
+  gap: clamp(24px, 5vw, 64px);
+  min-height: 620px;
+  padding-top: clamp(42px, 8vw, 86px);
+}
+
+.hero::before {
+  content: "The Jane Company";
+  position: absolute;
+  right: -1rem;
+  bottom: -2.8rem;
+  color: rgba(32, 26, 20, 0.045);
+  font-size: clamp(4.5rem, 13vw, 11rem);
+  font-style: italic;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  color: var(--seal);
+  font-size: 0.78rem;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.02;
+  font-weight: 500;
+}
+
+h1 {
+  max-width: 11ch;
+  margin-bottom: 1.1rem;
+  font-size: clamp(4rem, 12vw, 9.5rem);
+  letter-spacing: -0.075em;
+}
+
+h2 {
+  margin-bottom: 0.7rem;
+  font-size: clamp(2.2rem, 5vw, 4.6rem);
+  letter-spacing: -0.045em;
+}
+
+h3 {
+  margin-bottom: 0.7rem;
+  font-size: clamp(1.35rem, 3vw, 2.05rem);
+  letter-spacing: -0.025em;
+}
+
+.hero-text {
+  max-width: 660px;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.34rem);
+}
+
+.hero-actions,
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.button,
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 45px;
+  padding: 0.72rem 1.05rem;
+  border: 1px solid rgba(32, 26, 20, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.76);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button.primary,
+.filter-button.active {
+  border-color: transparent;
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.button.small {
+  min-height: 38px;
+  padding: 0.54rem 0.85rem;
+  font-size: 0.83rem;
+}
+
+.notice-card,
+.work-card,
+.record-card,
+.music-notes,
+.post-card {
+  position: relative;
+  border: 1px solid var(--line);
+  background: rgba(255, 250, 240, 0.64);
+  box-shadow: 0 18px 45px rgba(61, 43, 25, 0.08);
+}
+
+.notice-card {
+  padding: 28px;
+  border-radius: 24px;
+}
+
+.notice-label,
+.card-kicker {
+  margin-bottom: 0.55rem;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.notice-card h2 {
+  font-size: clamp(1.8rem, 3vw, 2.45rem);
+}
+
+.section-heading {
+  max-width: 760px;
+  margin-bottom: clamp(22px, 4vw, 38px);
+}
+
+.section-heading p:last-child,
+.work-card p,
+.record-card p,
+.music-notes li,
+.post-card p,
+.about p,
+.notice-card p:last-child {
+  color: var(--muted);
+}
+
+.section-heading.narrow {
+  max-width: 850px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.work-card,
+.post-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  padding: 24px;
+  border-radius: 24px;
+}
+
+.work-card a,
+.post-card a {
+  margin-top: auto;
+  color: var(--seal);
+  font-weight: 700;
+}
+
+.music-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+}
+
+.record-card {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 26px;
+}
+
+.record-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid rgba(32, 26, 20, 0.22);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 250, 240, 0.23), transparent 38%),
+    linear-gradient(145deg, var(--seal), var(--seal-dark));
+  color: var(--cream);
+  box-shadow: inset 0 0 0 12px rgba(255, 250, 240, 0.07);
+}
+
+.record-art span {
+  font-size: 5rem;
+  line-height: 1;
+}
+
+.music-notes {
+  padding: 24px;
+  border-radius: 26px;
+}
+
+.music-notes ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.music-notes li {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.music-notes li:last-child {
+  border-bottom: 0;
+}
+
+.music-notes span,
+.music-notes em,
+time {
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  font-style: normal;
+}
+
+.post-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.post-card.is-hidden {
+  display: none;
+}
+
+.about {
+  min-height: 360px;
+  display: grid;
+  align-items: center;
+}
+
+.about p {
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+}
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 26px 0 40px;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .site-shell {
+    width: min(100% - 22px, var(--max-width));
+  }
+
+  .menu-toggle {
+    display: inline-block;
+  }
+
+  .site-nav {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: none;
+    width: min(260px, calc(100vw - 28px));
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 250, 240, 0.96);
+    box-shadow: 0 18px 45px var(--shadow);
+  }
+
+  .site-nav.open {
+    display: grid;
+  }
+
+  .site-nav a {
+    border-radius: 12px;
+  }
+
+  .hero,
+  .music-board,
+  .record-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: unset;
+  }
+
+  .card-grid,
+  .post-list {
+    grid-template-columns: 1fr;
+  }
+
+  .record-art {
+    width: min(210px, 100%);
+  }
+
+  .music-notes li {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .site-header {
+    align-items: flex-start;
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+    font-size: 1.35rem;
+  }
+
+  .brand-line {
+    font-size: 0.68rem;
+  }
+
+  .section-panel {
+    margin: 18px 0;
+    border-radius: 22px;
+  }
+
+  .section-panel::after {
+    inset: 9px;
+    border-radius: 16px;
+  }
+
+  h1 {
+    font-size: clamp(3.45rem, 18vw, 5.8rem);
+  }
+
+  .hero-actions,
+  .filter-row,
+  .site-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .button,
+  .filter-button {
+    width: 100%;
+  }
+}
