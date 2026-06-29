@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin · The Jane Company</title>
+  <meta name="description" content="Private editor for The Jane Company." />
+  <meta name="theme-color" content="#efe6d2" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header" id="top">
+      <a class="brand" href="../" aria-label="The Jane Company home">
+        <span class="brand-mark">J</span>
+        <span>
+          <span class="brand-name">The Jane Company</span>
+          <span class="brand-line">Editor room</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../stories/">Stories</a>
+        <a href="../music/">Music</a>
+        <a href="../blog/">Blog</a>
+        <a href="../#about">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero section-panel" aria-labelledby="admin-title">
+        <div>
+          <a class="back-link" href="../blog/">← Back to blog</a>
+          <p class="eyebrow">Private room</p>
+          <h1 id="admin-title">Editor</h1>
+          <p class="hero-text">
+            Add and edit posts from the site. This page commits changes to the GitHub repository, then the public blog reads them from the post archive.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-panel" aria-labelledby="token-title">
+        <div class="section-heading">
+          <p class="eyebrow">Key to the desk</p>
+          <h2 id="token-title">Connect GitHub.</h2>
+          <p>
+            This page is public, but it cannot save anything unless you paste your own GitHub token. Use a fine-grained token limited to this repository with Contents read/write permission.
+          </p>
+        </div>
+
+        <div class="token-row">
+          <label>
+            GitHub token
+            <input id="github-token" type="password" autocomplete="off" placeholder="Paste token here" />
+          </label>
+          <label class="checkbox-line">
+            <input id="remember-token" type="checkbox" />
+            Remember token on this device only
+          </label>
+          <p class="security-note">
+            Do not share this page with the token filled in. The token is never committed to the repo; it stays in this browser unless you choose to remember it.
+          </p>
+          <div class="token-actions">
+            <button class="button primary" id="load-posts" type="button">Load archive</button>
+            <button class="button" id="clear-token" type="button">Clear saved token</button>
+          </div>
+          <div class="status-box" id="status-box" role="status">Preparing editor.</div>
+        </div>
+      </section>
+
+      <section class="section-panel admin-layout" aria-labelledby="post-editor-title">
+        <aside class="admin-panel">
+          <p class="eyebrow">Archive</p>
+          <h2>Posts</h2>
+          <p class="security-note">Load the archive, choose a post to edit, or start a new one.</p>
+          <div class="admin-actions">
+            <button class="button primary" id="new-post" type="button">New post</button>
+          </div>
+          <div class="post-picker" id="post-picker"></div>
+        </aside>
+
+        <article class="admin-panel">
+          <p class="eyebrow">Write</p>
+          <h2 id="post-editor-title">Post editor.</h2>
+
+          <form class="admin-form" id="post-form">
+            <label>
+              Title
+              <input id="post-title" type="text" placeholder="Post title" required />
+            </label>
+
+            <label>
+              Slug
+              <input id="post-slug" type="text" placeholder="post-url-name" />
+            </label>
+
+            <label>
+              Date
+              <input id="post-date" type="date" />
+            </label>
+
+            <label>
+              Category
+              <select id="post-category">
+                <option value="notes">Notes</option>
+                <option value="music">Music</option>
+                <option value="fiction">Fiction</option>
+              </select>
+            </label>
+
+            <label>
+              Status
+              <select id="post-status">
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+              </select>
+            </label>
+
+            <label>
+              Excerpt
+              <textarea id="post-excerpt" placeholder="Short summary for cards"></textarea>
+            </label>
+
+            <label>
+              Body
+              <textarea id="post-body" placeholder="Write the post. Use blank lines between paragraphs."></textarea>
+            </label>
+
+            <div class="admin-actions">
+              <button class="button primary" id="save-post" type="submit">Save to site</button>
+              <a class="button" href="../blog/">View blog</a>
+            </div>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> The Jane Company.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <script src="../script.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
