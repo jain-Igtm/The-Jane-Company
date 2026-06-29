@@ -40,37 +40,42 @@
           <p class="eyebrow">Private room</p>
           <h1 id="admin-title">Editor</h1>
           <p class="hero-text">
-            Add and edit posts from the site. This page commits changes to the GitHub repository, then the public blog reads them from the post archive.
+            A Supabase-backed writing room for adding and editing posts from the site. No GitHub token belongs here anymore.
           </p>
         </div>
       </section>
 
-      <section class="section-panel" aria-labelledby="token-title">
+      <section class="section-panel" aria-labelledby="login-title">
         <div class="section-heading">
           <p class="eyebrow">Key to the desk</p>
-          <h2 id="token-title">Connect GitHub.</h2>
+          <h2 id="login-title">Sign in.</h2>
           <p>
-            This page is public, but it cannot save anything unless you paste your own GitHub token. Use a fine-grained token limited to this repository with Contents read/write permission.
+            Once Supabase is configured, use the email and password for your Supabase user. The editor saves posts to the database, and the public site reads published entries from there.
           </p>
         </div>
 
-        <div class="token-row">
-          <label>
-            GitHub token
-            <input id="github-token" type="password" autocomplete="off" placeholder="Paste token here" />
-          </label>
-          <label class="checkbox-line">
-            <input id="remember-token" type="checkbox" />
-            Remember token on this device only
-          </label>
-          <p class="security-note">
-            Do not share this page with the token filled in. The token is never committed to the repo; it stays in this browser unless you choose to remember it.
-          </p>
-          <div class="token-actions">
-            <button class="button primary" id="load-posts" type="button">Load archive</button>
-            <button class="button" id="clear-token" type="button">Clear saved token</button>
-          </div>
-          <div class="status-box" id="status-box" role="status">Preparing editor.</div>
+        <div class="auth-grid">
+          <form class="admin-form auth-card" id="login-form">
+            <label>
+              Email
+              <input id="login-email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Password
+              <input id="login-password" type="password" autocomplete="current-password" placeholder="Password" required />
+            </label>
+            <div class="admin-actions">
+              <button class="button primary" type="submit">Sign in</button>
+              <button class="button" id="sign-out" type="button">Sign out</button>
+            </div>
+          </form>
+
+          <aside class="admin-panel setup-card">
+            <p class="eyebrow">Setup state</p>
+            <h3 id="setup-heading">Checking Supabase.</h3>
+            <p id="setup-copy" class="security-note">Looking for project configuration.</p>
+            <div class="status-box" id="status-box" role="status">Preparing editor.</div>
+          </aside>
         </div>
       </section>
 
@@ -78,7 +83,7 @@
         <aside class="admin-panel">
           <p class="eyebrow">Archive</p>
           <h2>Posts</h2>
-          <p class="security-note">Load the archive, choose a post to edit, or start a new one.</p>
+          <p class="security-note">Sign in, choose a post to edit, or start a new one.</p>
           <div class="admin-actions">
             <button class="button primary" id="new-post" type="button">New post</button>
           </div>
@@ -133,7 +138,8 @@
             </label>
 
             <div class="admin-actions">
-              <button class="button primary" id="save-post" type="submit">Save to site</button>
+              <button class="button primary" id="save-post" type="submit">Save post</button>
+              <button class="button" id="delete-post" type="button">Delete post</button>
               <a class="button" href="../blog/">View blog</a>
             </div>
           </form>
@@ -148,6 +154,7 @@
   </div>
 
   <script src="../script.js"></script>
-  <script src="admin.js"></script>
+  <script src="../supabase-config.js"></script>
+  <script type="module" src="admin.js"></script>
 </body>
 </html>
