@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog · The Jane Company</title>
+  <meta name="description" content="Blog posts, notes, essays, updates, and observations from The Jane Company." />
+  <meta name="theme-color" content="#efe6d2" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header" id="top">
+      <a class="brand" href="../" aria-label="The Jane Company home">
+        <span class="brand-mark">J</span>
+        <span>
+          <span class="brand-name">The Jane Company</span>
+          <span class="brand-line">Collected works</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../stories/">Stories</a>
+        <a href="../music/">Music</a>
+        <a href="../blog/" aria-current="page">Blog</a>
+        <a href="../#about">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero section-panel" aria-labelledby="blog-title">
+        <div>
+          <a class="back-link" href="../">← Front room</a>
+          <p class="eyebrow">The Desk</p>
+          <h1 id="blog-title">Blog</h1>
+          <p class="hero-text">
+            Notes from the desk: updates, fragments, observations, arguments, project logs, announcements, and whatever wants to be written without becoming fiction or music.
+          </p>
+        </div>
+      </section>
+
+      <section class="journal section-panel" aria-labelledby="entries-title">
+        <div class="section-heading">
+          <p class="eyebrow">Entries</p>
+          <h2 id="entries-title">The first papers.</h2>
+          <p>Use the filters to sort the placeholder posts. Later, these can become real articles or link to individual post pages.</p>
+        </div>
+
+        <div class="filter-row" aria-label="Post filters">
+          <button class="filter-button active" type="button" data-filter="all">All</button>
+          <button class="filter-button" type="button" data-filter="notes">Notes</button>
+          <button class="filter-button" type="button" data-filter="music">Music</button>
+          <button class="filter-button" type="button" data-filter="fiction">Fiction</button>
+        </div>
+
+        <div class="post-list" id="post-list">
+          <article class="post-card" data-kind="notes">
+            <time datetime="2026-06-29">June 29, 2026</time>
+            <h3>The doors are open</h3>
+            <p>
+              The Jane Company is live: a simple, old-feeling site for blog posts, music, stories, and collected work.
+            </p>
+            <a href="#">Read soon</a>
+          </article>
+
+          <article class="post-card" data-kind="fiction">
+            <time datetime="2026-06-29">June 29, 2026</time>
+            <h3>Story shelves prepared</h3>
+            <p>
+              The library page is ready for story worlds, chapters, scene fragments, and fiction notes.
+            </p>
+            <a href="../stories/">Visit stories</a>
+          </article>
+
+          <article class="post-card" data-kind="music">
+            <time datetime="2026-06-29">June 29, 2026</time>
+            <h3>Music room prepared</h3>
+            <p>
+              The music page is ready for tracks, lyrics, rough cuts, release notes, and links.
+            </p>
+            <a href="../music/">Visit music</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-panel split-layout" aria-labelledby="desk-note-title">
+        <article class="essay-card">
+          <p class="eyebrow">Desk note</p>
+          <h2 id="desk-note-title">How to use this room.</h2>
+          <p>
+            The blog can stay simple at first. Each post can be an article card here, then later move into its own page once the archive gets bigger. Nothing has to become complicated before there is enough work to justify it.
+          </p>
+          <p class="editorial-note">
+            Suggested next step: add the first real post and let the site’s structure grow from actual material.
+          </p>
+        </article>
+
+        <aside class="quote-card">
+          <blockquote>Not every thought needs a platform. Some only need a desk.</blockquote>
+          <cite>The Jane Company style note</cite>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> The Jane Company.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>
