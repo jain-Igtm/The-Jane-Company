@@ -4,18 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Jane Company</title>
-  <meta name="description" content="The Jane Company: stories, music, notes, and other works by Jane." />
+  <meta name="description" content="The Jane Company: stories, music, blog posts, notes, and collected works by Jane." />
   <meta name="theme-color" content="#efe6d2" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="site-shell">
     <header class="site-header" id="top">
-      <a class="brand" href="#top" aria-label="The Jane Company home">
+      <a class="brand" href="index.html" aria-label="The Jane Company home">
         <span class="brand-mark">J</span>
         <span>
           <span class="brand-name">The Jane Company</span>
-          <span class="brand-line">Stories · Music · Notes</span>
+          <span class="brand-line">Collected works</span>
         </span>
       </a>
 
@@ -25,9 +25,9 @@
       </button>
 
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#writing">Writing</a>
-        <a href="#music">Music</a>
-        <a href="#journal">Blog</a>
+        <a href="stories/">Stories</a>
+        <a href="music/">Music</a>
+        <a href="blog/">Blog</a>
         <a href="#about">About</a>
       </nav>
     </header>
@@ -35,136 +35,95 @@
     <main>
       <section class="hero section-panel" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow">Established for unfinished things, finished things, and things found late at night.</p>
-          <h1 id="hero-title">A quiet house for the work.</h1>
+          <p class="eyebrow">Private press · public room</p>
+          <h1 id="hero-title">The Jane Company</h1>
           <p class="hero-text">
-            The Jane Company is a home for fiction, songs, journals, fragments, and whatever else deserves a clean room with good light.
+            A quiet online house for stories, songs, blog posts, fragments, drafts, finished pieces, and the strange little artifacts that gather around a working life.
           </p>
           <div class="hero-actions" aria-label="Featured links">
-            <a class="button primary" href="#writing">Enter the library</a>
-            <a class="button" href="#music">Visit the music room</a>
+            <a class="button primary" href="stories/">Enter the library</a>
+            <a class="button" href="music/">Visit the music room</a>
           </div>
         </div>
 
         <aside class="notice-card" aria-label="Current notice">
-          <p class="notice-label">Now opening</p>
-          <h2>First rooms under construction</h2>
+          <p class="notice-label">Notice on the door</p>
+          <h2>Now open.</h2>
           <p>
-            Blog posts, stories, and music will live here. For now, the doors are unlocked and the lamps are on.
+            The first version is live: a front room, a story archive, a music shelf, and a desk for blog posts. The rooms are plain enough to grow and polished enough to invite people in.
           </p>
         </aside>
       </section>
 
-      <section class="collection section-panel" id="writing" aria-labelledby="writing-title">
+      <section class="collection section-panel" aria-labelledby="rooms-title">
         <div class="section-heading">
-          <p class="eyebrow">The Library</p>
-          <h2 id="writing-title">Stories</h2>
-          <p>Longer fiction, serial chapters, scene fragments, and worlds worth returning to.</p>
+          <p class="eyebrow">Rooms of the house</p>
+          <h2 id="rooms-title">Choose a door.</h2>
+          <p>Each section has its own page now, so the site can grow without turning the homepage into a junk drawer.</p>
         </div>
 
-        <div class="card-grid">
-          <article class="work-card">
-            <p class="card-kicker">Fiction</p>
-            <h3>Ocean-Bridge World</h3>
+        <div class="card-grid feature-grid">
+          <article class="work-card feature-card">
+            <p class="card-kicker">The Library</p>
+            <h3>Stories</h3>
             <p>
-              Salt, steel, checkpoints, weather, jurisdiction, and roads built over impossible water.
+              Serial fiction, world notes, chapters, fragments, and longer pieces arranged like shelves in a private library.
             </p>
-            <a href="#" aria-label="Ocean-Bridge World coming soon">Coming soon</a>
+            <a href="stories/">Open stories</a>
           </article>
 
-          <article class="work-card">
-            <p class="card-kicker">Fiction</p>
-            <h3>Everett</h3>
+          <article class="work-card feature-card">
+            <p class="card-kicker">The Music Room</p>
+            <h3>Music</h3>
             <p>
-              Notes and scenes from a life shaped by institutions, secrecy, escape, and memory.
+              Singles, demos, lyrics, release notes, cover art, and links to the places where the tracks live.
             </p>
-            <a href="#" aria-label="Everett coming soon">Coming soon</a>
+            <a href="music/">Open music</a>
           </article>
 
-          <article class="work-card">
-            <p class="card-kicker">Fiction</p>
-            <h3>Arthur</h3>
+          <article class="work-card feature-card">
+            <p class="card-kicker">The Desk</p>
+            <h3>Blog</h3>
             <p>
-              Psychic pressure, surveillance logic, and the terrible intimacy of being noticed by systems.
+              Notes, observations, project updates, small essays, and whatever refuses to fit inside a cleaner category.
             </p>
-            <a href="#" aria-label="Arthur coming soon">Coming soon</a>
+            <a href="blog/">Open blog</a>
           </article>
         </div>
       </section>
 
-      <section class="music section-panel" id="music" aria-labelledby="music-title">
+      <section class="ledger section-panel" aria-labelledby="ledger-title">
         <div class="section-heading">
-          <p class="eyebrow">The Music Room</p>
-          <h2 id="music-title">Music</h2>
-          <p>Singles, drafts, lyrics, cover art, and release notes.</p>
+          <p class="eyebrow">Latest from the ledger</p>
+          <h2 id="ledger-title">Fresh entries.</h2>
         </div>
 
-        <div class="music-board">
-          <article class="record-card">
-            <div class="record-art" aria-hidden="true">
-              <span>J</span>
-            </div>
-            <div>
-              <p class="card-kicker">Featured track</p>
-              <h3>First release goes here</h3>
-              <p>
-                Add a SoundCloud, YouTube, BandLab, or audio file link when the first track is ready.
-              </p>
-              <a class="button small" href="#" aria-label="Music link coming soon">Coming soon</a>
-            </div>
-          </article>
-
-          <div class="music-notes">
-            <h3>Release shelf</h3>
-            <ul>
-              <li><span>Single</span><strong>Untitled</strong><em>Draft</em></li>
-              <li><span>Lyrics</span><strong>Notebook I</strong><em>Open</em></li>
-              <li><span>Mixes</span><strong>Rough cuts</strong><em>Pending</em></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="journal section-panel" id="journal" aria-labelledby="journal-title">
-        <div class="section-heading">
-          <p class="eyebrow">The Desk</p>
-          <h2 id="journal-title">Blog</h2>
-          <p>Posts, observations, project notes, and whatever refuses to fit anywhere else.</p>
-        </div>
-
-        <div class="filter-row" aria-label="Post filters">
-          <button class="filter-button active" type="button" data-filter="all">All</button>
-          <button class="filter-button" type="button" data-filter="notes">Notes</button>
-          <button class="filter-button" type="button" data-filter="music">Music</button>
-          <button class="filter-button" type="button" data-filter="fiction">Fiction</button>
-        </div>
-
-        <div class="post-list" id="post-list">
-          <article class="post-card" data-kind="notes">
+        <div class="post-list">
+          <article class="post-card">
             <time datetime="2026-06-29">June 29, 2026</time>
             <h3>The doors are open</h3>
             <p>
-              The first version of The Jane Company is online: a front room, a library, a music room, and a desk waiting for posts.
+              The Jane Company exists now: a clean first site with room for blog posts, music, and fiction.
             </p>
-            <a href="#">Read soon</a>
+            <a href="blog/">Visit the desk</a>
           </article>
 
-          <article class="post-card" data-kind="fiction">
+          <article class="post-card">
             <time datetime="2026-06-29">June 29, 2026</time>
-            <h3>Where stories will live</h3>
+            <h3>Shelves reserved for fiction</h3>
             <p>
-              This shelf is reserved for serial fiction, world notes, chapters, and scenes as they become ready to publish.
+              The story archive is ready for serial worlds, scenes, chapters, notes, and fragments.
             </p>
-            <a href="#">Read soon</a>
+            <a href="stories/">Visit the library</a>
           </article>
 
-          <article class="post-card" data-kind="music">
+          <article class="post-card">
             <time datetime="2026-06-29">June 29, 2026</time>
-            <h3>Where songs will live</h3>
+            <h3>A room for songs</h3>
             <p>
-              This shelf is reserved for tracks, lyrics, release notes, demos, and links to outside music pages.
+              The music page is ready for tracks, lyrics, rough mixes, outside links, and release notes.
             </p>
-            <a href="#">Listen soon</a>
+            <a href="music/">Visit the music room</a>
           </article>
         </div>
       </section>
@@ -174,7 +133,10 @@
           <p class="eyebrow">About the company</p>
           <h2 id="about-title">A name on the door.</h2>
           <p>
-            The Jane Company is not a corporation so much as a sign hung over a private workshop: a place to publish the things that would otherwise stay scattered across apps, notes, drafts, and late-night files.
+            The Jane Company is not a corporation so much as a sign hung over a private workshop: a place to gather the work that would otherwise stay scattered across apps, notes, drafts, voice memos, exported files, and half-finished folders.
+          </p>
+          <p>
+            The style is old without being dusty, simple without being empty, and built so the next update can add real posts instead of rebuilding the whole house.
           </p>
         </div>
       </section>
