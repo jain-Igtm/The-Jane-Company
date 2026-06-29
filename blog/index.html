@@ -48,7 +48,7 @@
         <div class="section-heading">
           <p class="eyebrow">Entries</p>
           <h2 id="entries-title">The papers.</h2>
-          <p>These entries are loaded from the editable post archive. Use the admin room to add or revise them from the site.</p>
+          <p>These entries are ready to load from Supabase once it is configured. Until then, the local archive keeps the room furnished.</p>
         </div>
 
         <div class="filter-row" aria-label="Post filters">
@@ -71,10 +71,10 @@
           <p class="eyebrow">Desk note</p>
           <h2 id="desk-note-title">How to use this room.</h2>
           <p>
-            The blog can stay simple at first. Each post is stored in a single editable archive, then rendered here and on its own reading page. Nothing has to become complicated before there is enough work to justify it.
+            The blog can stay simple at first. Once Supabase is connected, posts are stored in the database and rendered here without changing the public interface.
           </p>
           <p class="editorial-note">
-            Admin room: <a href="../admin/">open the editor</a>. Keep that link private unless you want other people poking around the door.
+            Admin room: <a href="../admin/">open the editor</a>. It will activate once Supabase is configured.
           </p>
         </article>
 
@@ -92,6 +92,7 @@
   </div>
 
   <script src="../script.js"></script>
+  <script src="../supabase-config.js"></script>
   <script src="../content-loader.js" data-posts-url="../content/posts.json" data-post-base="../post/"></script>
 </body>
 </html>
