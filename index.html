@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Jane Company</title>
+  <meta name="description" content="The Jane Company: stories, music, notes, and other works by Jane." />
+  <meta name="theme-color" content="#efe6d2" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="The Jane Company home">
+        <span class="brand-mark">J</span>
+        <span>
+          <span class="brand-name">The Jane Company</span>
+          <span class="brand-line">Stories · Music · Notes</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#writing">Writing</a>
+        <a href="#music">Music</a>
+        <a href="#journal">Blog</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero section-panel" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Established for unfinished things, finished things, and things found late at night.</p>
+          <h1 id="hero-title">A quiet house for the work.</h1>
+          <p class="hero-text">
+            The Jane Company is a home for fiction, songs, journals, fragments, and whatever else deserves a clean room with good light.
+          </p>
+          <div class="hero-actions" aria-label="Featured links">
+            <a class="button primary" href="#writing">Enter the library</a>
+            <a class="button" href="#music">Visit the music room</a>
+          </div>
+        </div>
+
+        <aside class="notice-card" aria-label="Current notice">
+          <p class="notice-label">Now opening</p>
+          <h2>First rooms under construction</h2>
+          <p>
+            Blog posts, stories, and music will live here. For now, the doors are unlocked and the lamps are on.
+          </p>
+        </aside>
+      </section>
+
+      <section class="collection section-panel" id="writing" aria-labelledby="writing-title">
+        <div class="section-heading">
+          <p class="eyebrow">The Library</p>
+          <h2 id="writing-title">Stories</h2>
+          <p>Longer fiction, serial chapters, scene fragments, and worlds worth returning to.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="work-card">
+            <p class="card-kicker">Fiction</p>
+            <h3>Ocean-Bridge World</h3>
+            <p>
+              Salt, steel, checkpoints, weather, jurisdiction, and roads built over impossible water.
+            </p>
+            <a href="#" aria-label="Ocean-Bridge World coming soon">Coming soon</a>
+          </article>
+
+          <article class="work-card">
+            <p class="card-kicker">Fiction</p>
+            <h3>Everett</h3>
+            <p>
+              Notes and scenes from a life shaped by institutions, secrecy, escape, and memory.
+            </p>
+            <a href="#" aria-label="Everett coming soon">Coming soon</a>
+          </article>
+
+          <article class="work-card">
+            <p class="card-kicker">Fiction</p>
+            <h3>Arthur</h3>
+            <p>
+              Psychic pressure, surveillance logic, and the terrible intimacy of being noticed by systems.
+            </p>
+            <a href="#" aria-label="Arthur coming soon">Coming soon</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="music section-panel" id="music" aria-labelledby="music-title">
+        <div class="section-heading">
+          <p class="eyebrow">The Music Room</p>
+          <h2 id="music-title">Music</h2>
+          <p>Singles, drafts, lyrics, cover art, and release notes.</p>
+        </div>
+
+        <div class="music-board">
+          <article class="record-card">
+            <div class="record-art" aria-hidden="true">
+              <span>J</span>
+            </div>
+            <div>
+              <p class="card-kicker">Featured track</p>
+              <h3>First release goes here</h3>
+              <p>
+                Add a SoundCloud, YouTube, BandLab, or audio file link when the first track is ready.
+              </p>
+              <a class="button small" href="#" aria-label="Music link coming soon">Coming soon</a>
+            </div>
+          </article>
+
+          <div class="music-notes">
+            <h3>Release shelf</h3>
+            <ul>
+              <li><span>Single</span><strong>Untitled</strong><em>Draft</em></li>
+              <li><span>Lyrics</span><strong>Notebook I</strong><em>Open</em></li>
+              <li><span>Mixes</span><strong>Rough cuts</strong><em>Pending</em></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="journal section-panel" id="journal" aria-labelledby="journal-title">
+        <div class="section-heading">
+          <p class="eyebrow">The Desk</p>
+          <h2 id="journal-title">Blog</h2>
+          <p>Posts, observations, project notes, and whatever refuses to fit anywhere else.</p>
+        </div>
+
+        <div class="filter-row" aria-label="Post filters">
+          <button class="filter-button active" type="button" data-filter="all">All</button>
+          <button class="filter-button" type="button" data-filter="notes">Notes</button>
+          <button class="filter-button" type="button" data-filter="music">Music</button>
+          <button class="filter-button" type="button" data-filter="fiction">Fiction</button>
+        </div>
+
+        <div class="post-list" id="post-list">
+          <article class="post-card" data-kind="notes">
+            <time datetime="2026-06-29">June 29, 2026</time>
+            <h3>The doors are open</h3>
+            <p>
+              The first version of The Jane Company is online: a front room, a library, a music room, and a desk waiting for posts.
+            </p>
+            <a href="#">Read soon</a>
+          </article>
+
+          <article class="post-card" data-kind="fiction">
+            <time datetime="2026-06-29">June 29, 2026</time>
+            <h3>Where stories will live</h3>
+            <p>
+              This shelf is reserved for serial fiction, world notes, chapters, and scenes as they become ready to publish.
+            </p>
+            <a href="#">Read soon</a>
+          </article>
+
+          <article class="post-card" data-kind="music">
+            <time datetime="2026-06-29">June 29, 2026</time>
+            <h3>Where songs will live</h3>
+            <p>
+              This shelf is reserved for tracks, lyrics, release notes, demos, and links to outside music pages.
+            </p>
+            <a href="#">Listen soon</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="about section-panel" id="about" aria-labelledby="about-title">
+        <div class="section-heading narrow">
+          <p class="eyebrow">About the company</p>
+          <h2 id="about-title">A name on the door.</h2>
+          <p>
+            The Jane Company is not a corporation so much as a sign hung over a private workshop: a place to publish the things that would otherwise stay scattered across apps, notes, drafts, and late-night files.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> The Jane Company.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
