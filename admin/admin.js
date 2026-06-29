@@ -1,23 +1,27 @@
-const REPO_OWNER = 'jain-Igtm';
-const REPO_NAME = 'The-Jane-Company';
-const BRANCH = 'main';
-const POSTS_PATH = 'content/posts.json';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-const tokenInput = document.querySelector('#github-token');
-const rememberToken = document.querySelector('#remember-token');
-const loadButton = document.querySelector('#load-posts');
-const clearTokenButton = document.querySelector('#clear-token');
-const newButton = document.querySelector('#new-post');
-const saveButton = document.querySelector('#save-post');
+const config = window.JANE_SUPABASE_CONFIG || {};
+const isConfigured = Boolean(
+  config.url &&
+  config.anonKey &&
+  /^https:\/\/.+\.supabase\.co\/?$/.test(config.url) &&
+  config.anonKey.length > 20
+);
+
+const loginForm = document.querySelector('#login-form');
+const signOutButton = document.querySelector('#sign-out');
 const statusBox = document.querySelector('#status-box');
+const setupHeading = document.querySelector('#setup-heading');
+const setupCopy = document.querySelector('#setup-copy');
 const picker = document.querySelector('#post-picker');
 const form = document.querySelector('#post-form');
-
-let archive = { posts: [] };
-let archiveSha = null;
-let selectedId = null;
+const newButton = document.querySelector('#new-post');
+const deleteButton = document.querySelector('#delete-post');
+const editorSection = document.querySelector('.admin-layout');
 
 const fields = {
+  email: document.querySelector('#login-email'),
+  password: document.querySelector('#login-password'),
   title: document.querySelector('#post-title'),
   slug: document.querySelector('#post-slug'),
   date: document.querySelector('#post-date'),
@@ -27,12 +31,19 @@ const fields = {
   body: document.querySelector('#post-body')
 };
 
+let supabase = null;
+let posts = [];
+let selectedId = null;
+let currentUser = null;
+
 const setStatus = (message, kind = '') => {
   statusBox.textContent = message;
   statusBox.className = `status-box ${kind}`.trim();
 };
 
-const getToken = () => tokenInput.value.trim();
+const setEditorEnabled = (enabled) => {
+  editorSection.classList.toggle('is-disabled', !enabled);
+};
 
 const slugify = (value) => String(value || '')
   .toLowerCase()
@@ -42,82 +53,36 @@ const slugify = (value) => String(value || '')
   .replace(/^-+|-+$/g, '')
   .slice(0, 80);
 
-const decodeBase64Unicode = (base64) => {
-  const binary = atob(base64.replace(/\n/g, ''));
-  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
-  return new TextDecoder().decode(bytes);
-};
+const formatDate = (value) => value || new Date().toISOString().slice(0, 10);
 
-const encodeBase64Unicode = (text) => {
-  const bytes = new TextEncoder().encode(text);
-  let binary = '';
-  bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
-  return btoa(binary);
-};
-
-const apiRequest = async (url, options = {}) => {
-  const token = getToken();
-  if (!token) throw new Error('Paste a GitHub token first.');
-
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${token}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-      ...(options.headers || {})
-    }
-  });
-
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(data.message || `GitHub request failed: ${response.status}`);
-  }
-  return data;
-};
-
-const contentUrl = () => `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${POSTS_PATH}`;
-
-const loadArchive = async () => {
-  setStatus('Opening the archive...');
-  const data = await apiRequest(`${contentUrl()}?ref=${encodeURIComponent(BRANCH)}`);
-  archiveSha = data.sha;
-  archive = JSON.parse(decodeBase64Unicode(data.content));
-  if (!Array.isArray(archive.posts)) archive.posts = [];
-  archive.posts.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
-  renderPicker();
-  fillForm(archive.posts[0] || null);
-  setStatus(`Archive loaded. ${archive.posts.length} entr${archive.posts.length === 1 ? 'y' : 'ies'} found.`, 'good');
-};
-
-const renderPicker = () => {
-  picker.innerHTML = '';
-
-  if (!archive.posts.length) {
-    picker.innerHTML = '<p class="security-note">No posts yet. Create the first one.</p>';
-    return;
-  }
-
-  archive.posts.forEach((post) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = post.id === selectedId ? 'active' : '';
-    button.innerHTML = `${post.title || 'Untitled'}<small>${post.date || 'Undated'} · ${post.category || 'notes'} · ${post.status || 'published'}</small>`;
-    button.addEventListener('click', () => fillForm(post));
-    picker.appendChild(button);
-  });
-};
-
-const fillForm = (post) => {
+const fillForm = (post = null) => {
   selectedId = post?.id || null;
   fields.title.value = post?.title || '';
   fields.slug.value = post?.slug || '';
-  fields.date.value = post?.date || new Date().toISOString().slice(0, 10);
+  fields.date.value = formatDate(post?.date);
   fields.category.value = post?.category || 'notes';
   fields.status.value = post?.status || 'published';
   fields.excerpt.value = post?.excerpt || '';
   fields.body.value = post?.body || '';
   renderPicker();
+};
+
+const renderPicker = () => {
+  picker.innerHTML = '';
+
+  if (!posts.length) {
+    picker.innerHTML = '<p class="security-note">No Supabase posts yet. Press “New post” and write the first one.</p>';
+    return;
+  }
+
+  posts.forEach((post) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = post.id === selectedId ? 'active' : '';
+    button.innerHTML = `${post.title || 'Untitled'}<small>${post.date || 'Undated'} · ${post.category || 'notes'} · ${post.status || 'draft'}</small>`;
+    button.addEventListener('click', () => fillForm(post));
+    picker.appendChild(button);
+  });
 };
 
 const collectForm = () => {
@@ -126,55 +91,89 @@ const collectForm = () => {
 
   if (!title) throw new Error('The post needs a title.');
   if (!slug) throw new Error('The post needs a slug.');
+  if (!currentUser?.id) throw new Error('Sign in before saving.');
 
   return {
-    id: selectedId || slug,
-    slug,
     title,
-    date: fields.date.value || new Date().toISOString().slice(0, 10),
+    slug,
+    date: formatDate(fields.date.value),
     category: fields.category.value || 'notes',
     excerpt: fields.excerpt.value.trim(),
     body: fields.body.value.trim(),
-    status: fields.status.value || 'published'
+    status: fields.status.value || 'draft',
+    author_id: currentUser.id
   };
 };
 
-const saveArchive = async () => {
-  const post = collectForm();
-  const existingIndex = archive.posts.findIndex((item) => item.id === post.id || item.slug === post.slug);
+const loadPosts = async () => {
+  if (!supabase) return;
 
-  if (existingIndex >= 0) {
-    archive.posts[existingIndex] = post;
-  } else {
-    archive.posts.unshift(post);
-  }
+  setStatus('Opening Supabase archive...');
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .order('date', { ascending: false })
+    .order('created_at', { ascending: false });
 
-  archive.posts.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+  if (error) throw error;
 
-  const content = JSON.stringify(archive, null, 2) + '\n';
-  setStatus('Saving to GitHub...');
-
-  const result = await apiRequest(contentUrl(), {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      message: `Update post archive: ${post.title}`,
-      content: encodeBase64Unicode(content),
-      sha: archiveSha,
-      branch: BRANCH
-    })
-  });
-
-  archiveSha = result.content.sha;
-  selectedId = post.id;
-  renderPicker();
-
-  const liveUrl = `../post/?slug=${encodeURIComponent(post.slug)}`;
-  setStatus(`Saved. GitHub Pages may need a moment to refresh. Live path: ${liveUrl}`, 'good');
+  posts = data || [];
+  fillForm(posts[0] || null);
+  setStatus(`Archive loaded. ${posts.length} entr${posts.length === 1 ? 'y' : 'ies'} found.`, 'good');
 };
 
-const makeNewPost = () => {
+const savePost = async () => {
+  const payload = collectForm();
+  setStatus('Saving post to Supabase...');
+
+  let result;
+  if (selectedId) {
+    result = await supabase
+      .from('posts')
+      .update(payload)
+      .eq('id', selectedId)
+      .select()
+      .single();
+  } else {
+    result = await supabase
+      .from('posts')
+      .insert(payload)
+      .select()
+      .single();
+  }
+
+  if (result.error) throw result.error;
+
+  selectedId = result.data.id;
+  await loadPosts();
+  fillForm(result.data);
+  setStatus(`Saved. Public link: ../post/?slug=${encodeURIComponent(result.data.slug)}`, 'good');
+};
+
+const deletePost = async () => {
+  if (!selectedId) {
+    setStatus('No saved post selected to delete.', 'bad');
+    return;
+  }
+
+  const post = posts.find((item) => item.id === selectedId);
+  const confirmed = window.confirm(`Delete “${post?.title || 'this post'}”? This cannot be undone from the editor.`);
+  if (!confirmed) return;
+
+  setStatus('Deleting post...');
+  const { error } = await supabase
+    .from('posts')
+    .delete()
+    .eq('id', selectedId);
+
+  if (error) throw error;
+
   selectedId = null;
+  await loadPosts();
+  setStatus('Post deleted.', 'good');
+};
+
+const newPost = () => {
   fillForm({
     title: '',
     slug: '',
@@ -188,45 +187,113 @@ const makeNewPost = () => {
   setStatus('New blank entry opened.');
 };
 
+const signIn = async (event) => {
+  event.preventDefault();
+  if (!supabase) return;
+
+  setStatus('Signing in...');
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: fields.email.value.trim(),
+    password: fields.password.value
+  });
+
+  if (error) throw error;
+
+  currentUser = data.user;
+  fields.password.value = '';
+  setEditorEnabled(true);
+  setupHeading.textContent = 'Signed in.';
+  setupCopy.textContent = currentUser.email || 'Editor session active.';
+  await loadPosts();
+};
+
+const signOut = async () => {
+  if (!supabase) return;
+  await supabase.auth.signOut();
+  currentUser = null;
+  posts = [];
+  selectedId = null;
+  fillForm(null);
+  setEditorEnabled(false);
+  setupHeading.textContent = 'Signed out.';
+  setupCopy.textContent = 'Sign in again to edit posts.';
+  setStatus('Signed out.', 'good');
+};
+
 fields.title.addEventListener('input', () => {
   if (!selectedId && !fields.slug.value.trim()) {
     fields.slug.value = slugify(fields.title.value);
   }
 });
 
-loadButton.addEventListener('click', async () => {
+loginForm.addEventListener('submit', async (event) => {
   try {
-    if (rememberToken.checked) localStorage.setItem('janeCompanyGithubToken', getToken());
-    await loadArchive();
+    await signIn(event);
   } catch (error) {
     setStatus(error.message, 'bad');
   }
 });
 
-clearTokenButton.addEventListener('click', () => {
-  localStorage.removeItem('janeCompanyGithubToken');
-  tokenInput.value = '';
-  setStatus('Saved token cleared from this browser.', 'good');
+signOutButton.addEventListener('click', async () => {
+  try {
+    await signOut();
+  } catch (error) {
+    setStatus(error.message, 'bad');
+  }
 });
 
-newButton.addEventListener('click', makeNewPost);
+newButton.addEventListener('click', newPost);
+
+deleteButton.addEventListener('click', async () => {
+  try {
+    await deletePost();
+  } catch (error) {
+    setStatus(error.message, 'bad');
+  }
+});
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   try {
-    if (!archiveSha) await loadArchive();
-    if (rememberToken.checked) localStorage.setItem('janeCompanyGithubToken', getToken());
-    await saveArchive();
+    await savePost();
   } catch (error) {
     setStatus(error.message, 'bad');
   }
 });
 
-const storedToken = localStorage.getItem('janeCompanyGithubToken');
-if (storedToken) {
-  tokenInput.value = storedToken;
-  rememberToken.checked = true;
-  setStatus('Saved token found on this browser. Press “Load archive” to begin.');
-} else {
-  setStatus('Paste a GitHub token with Contents read/write access, then load the archive.');
-}
+const init = async () => {
+  setEditorEnabled(false);
+
+  if (!isConfigured) {
+    setupHeading.textContent = 'Supabase not connected yet.';
+    setupCopy.textContent = 'Fill in supabase-config.js with your Supabase project URL and anon key after creating the project.';
+    setStatus('Backend scaffold is ready. Create the Supabase project, run supabase/schema.sql, then update supabase-config.js.', 'bad');
+    return;
+  }
+
+  supabase = createClient(config.url, config.anonKey, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  });
+
+  const { data } = await supabase.auth.getSession();
+  currentUser = data.session?.user || null;
+
+  if (currentUser) {
+    setEditorEnabled(true);
+    setupHeading.textContent = 'Signed in.';
+    setupCopy.textContent = currentUser.email || 'Editor session active.';
+    await loadPosts();
+  } else {
+    setupHeading.textContent = 'Supabase connected.';
+    setupCopy.textContent = 'Sign in to open the editor.';
+    setStatus('Supabase config found. Sign in to begin.', 'good');
+  }
+};
+
+init().catch((error) => {
+  setStatus(error.message, 'bad');
+});
