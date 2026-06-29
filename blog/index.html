@@ -47,8 +47,8 @@
       <section class="journal section-panel" aria-labelledby="entries-title">
         <div class="section-heading">
           <p class="eyebrow">Entries</p>
-          <h2 id="entries-title">The first papers.</h2>
-          <p>Use the filters to sort the placeholder posts. Later, these can become real articles or link to individual post pages.</p>
+          <h2 id="entries-title">The papers.</h2>
+          <p>These entries are loaded from the editable post archive. Use the admin room to add or revise them from the site.</p>
         </div>
 
         <div class="filter-row" aria-label="Post filters">
@@ -58,32 +58,10 @@
           <button class="filter-button" type="button" data-filter="fiction">Fiction</button>
         </div>
 
-        <div class="post-list" id="post-list">
-          <article class="post-card" data-kind="notes">
-            <time datetime="2026-06-29">June 29, 2026</time>
-            <h3>The doors are open</h3>
-            <p>
-              The Jane Company is live: a simple, old-feeling site for blog posts, music, stories, and collected work.
-            </p>
-            <a href="#">Read soon</a>
-          </article>
-
-          <article class="post-card" data-kind="fiction">
-            <time datetime="2026-06-29">June 29, 2026</time>
-            <h3>Story shelves prepared</h3>
-            <p>
-              The library page is ready for story worlds, chapters, scene fragments, and fiction notes.
-            </p>
-            <a href="../stories/">Visit stories</a>
-          </article>
-
-          <article class="post-card" data-kind="music">
-            <time datetime="2026-06-29">June 29, 2026</time>
-            <h3>Music room prepared</h3>
-            <p>
-              The music page is ready for tracks, lyrics, rough cuts, release notes, and links.
-            </p>
-            <a href="../music/">Visit music</a>
+        <div class="post-list" id="post-list" data-post-list>
+          <article class="post-card">
+            <h3>Loading entries</h3>
+            <p>The desk is opening the archive.</p>
           </article>
         </div>
       </section>
@@ -93,10 +71,10 @@
           <p class="eyebrow">Desk note</p>
           <h2 id="desk-note-title">How to use this room.</h2>
           <p>
-            The blog can stay simple at first. Each post can be an article card here, then later move into its own page once the archive gets bigger. Nothing has to become complicated before there is enough work to justify it.
+            The blog can stay simple at first. Each post is stored in a single editable archive, then rendered here and on its own reading page. Nothing has to become complicated before there is enough work to justify it.
           </p>
           <p class="editorial-note">
-            Suggested next step: add the first real post and let the site’s structure grow from actual material.
+            Admin room: <a href="../admin/">open the editor</a>. Keep that link private unless you want other people poking around the door.
           </p>
         </article>
 
@@ -114,5 +92,6 @@
   </div>
 
   <script src="../script.js"></script>
+  <script src="../content-loader.js" data-posts-url="../content/posts.json" data-post-base="../post/"></script>
 </body>
 </html>
