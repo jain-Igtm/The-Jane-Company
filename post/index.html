@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Entry · The Jane Company</title>
+  <meta name="description" content="A blog entry from The Jane Company." />
+  <meta name="theme-color" content="#efe6d2" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header" id="top">
+      <a class="brand" href="../" aria-label="The Jane Company home">
+        <span class="brand-mark">J</span>
+        <span>
+          <span class="brand-name">The Jane Company</span>
+          <span class="brand-line">Collected works</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../stories/">Stories</a>
+        <a href="../music/">Music</a>
+        <a href="../blog/">Blog</a>
+        <a href="../#about">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="page-hero section-panel" data-post-detail>
+        <div>
+          <a class="back-link" href="../blog/">← Back to blog</a>
+          <p class="eyebrow">Opening file</p>
+          <h1>Loading entry.</h1>
+          <p class="hero-text">The desk is opening the archive.</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> The Jane Company.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <script src="../script.js"></script>
+  <script src="../content-loader.js" data-posts-url="../content/posts.json" data-post-base="../post/"></script>
+</body>
+</html>
