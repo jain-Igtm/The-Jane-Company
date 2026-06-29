@@ -98,32 +98,10 @@
           <h2 id="ledger-title">Fresh entries.</h2>
         </div>
 
-        <div class="post-list">
+        <div class="post-list" data-post-list data-limit="3">
           <article class="post-card">
-            <time datetime="2026-06-29">June 29, 2026</time>
-            <h3>The doors are open</h3>
-            <p>
-              The Jane Company exists now: a clean first site with room for blog posts, music, and fiction.
-            </p>
-            <a href="blog/">Visit the desk</a>
-          </article>
-
-          <article class="post-card">
-            <time datetime="2026-06-29">June 29, 2026</time>
-            <h3>Shelves reserved for fiction</h3>
-            <p>
-              The story archive is ready for serial worlds, scenes, chapters, notes, and fragments.
-            </p>
-            <a href="stories/">Visit the library</a>
-          </article>
-
-          <article class="post-card">
-            <time datetime="2026-06-29">June 29, 2026</time>
-            <h3>A room for songs</h3>
-            <p>
-              The music page is ready for tracks, lyrics, rough mixes, outside links, and release notes.
-            </p>
-            <a href="music/">Visit the music room</a>
+            <h3>Loading entries</h3>
+            <p>The desk is opening the archive.</p>
           </article>
         </div>
       </section>
@@ -149,5 +127,6 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="content-loader.js" data-posts-url="content/posts.json" data-post-base="post/"></script>
 </body>
 </html>
